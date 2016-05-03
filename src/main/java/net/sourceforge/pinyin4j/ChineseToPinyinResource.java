@@ -20,15 +20,19 @@ package net.sourceforge.pinyin4j;
 
 import net.sourceforge.pinyin4j.multipinyin.Trie;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import com.gome.mx.plus.pinyin.ext.PYWriterUtils;
 
 /**
  * Manage all external resources required in PinyinHelper class.
  *
  * @author Li Min (xmlerlimin@gmail.com)
  */
-class ChineseToPinyinResource {
+public class ChineseToPinyinResource {
     /**
      * A hash table contains <Unicode, HanyuPinyin> pairs
      */
@@ -44,7 +48,7 @@ class ChineseToPinyinResource {
     /**
      * @return Returns the unicodeToHanyuPinyinTable.
      */
-    Trie getUnicodeToHanyuPinyinTable() {
+   public  Trie getUnicodeToHanyuPinyinTable() {
         return unicodeToHanyuPinyinTable;
     }
 
@@ -62,14 +66,21 @@ class ChineseToPinyinResource {
         try {
             final String resourceName = "/pinyindb/unicode_to_hanyu_pinyin.txt";
             final String resourceMultiName = "/pinyindb/multi_pinyin.txt";
-
+            final String userResourceName  = PYWriterUtils.getPath();
+            
             setUnicodeToHanyuPinyinTable(new Trie());
             getUnicodeToHanyuPinyinTable().load(ResourceHelper.getResourceInputStream(resourceName));
 
             getUnicodeToHanyuPinyinTable().loadMultiPinyin(ResourceHelper.getResourceInputStream(resourceMultiName));
 
             getUnicodeToHanyuPinyinTable().loadMultiPinyinExtend();
-
+            //加载用户自定义词库
+            if (userResourceName != null) {
+                File userMultiPinyinFile = new File(userResourceName);
+                FileInputStream is = new FileInputStream(userMultiPinyinFile);
+                getUnicodeToHanyuPinyinTable().load(is);
+            }
+           
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -153,9 +164,11 @@ class ChineseToPinyinResource {
      *
      * @return the one and only MySingleton.
      */
-    static ChineseToPinyinResource getInstance() {
+    public static ChineseToPinyinResource getInstance() {
+
         return ChineseToPinyinResourceHolder.theInstance;
     }
+
 
     /**
      * Singleton implementation helper.

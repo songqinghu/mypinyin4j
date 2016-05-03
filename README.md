@@ -1,6 +1,11 @@
 pinyin4j
 ========
-
+#####
+songqinghu--20160407 18:15
+使用动态扩展词库时需要指定一次文件所在位置--可以通过如下方式获取classes下文件
+String path = PinYinController.class.getResource("/xxxx").getPath();
+PYWriterUtils.setPath(path);
+############
 A copy of http://sourceforge.net/projects/pinyin4j, then deploy it to maven central repository.
 
 ### Download ###

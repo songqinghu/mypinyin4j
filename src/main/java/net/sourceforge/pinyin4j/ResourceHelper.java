@@ -23,13 +23,13 @@ import java.io.BufferedInputStream;
  * @author Li Min (xmlerlimin@gmail.com)
  * 
  */
-class ResourceHelper {
+public class ResourceHelper {
   /**
    * @param resourceName
    * @return resource (mainly file in file system or file in compressed
    *         package) as BufferedInputStream
    */
-  static BufferedInputStream getResourceInputStream(String resourceName) {
+  public static BufferedInputStream getResourceInputStream(String resourceName) {
     return new BufferedInputStream(ResourceHelper.class.getResourceAsStream(resourceName));
   }
 }

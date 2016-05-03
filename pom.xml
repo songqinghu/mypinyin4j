@@ -10,8 +10,8 @@
     </parent>
 
     <groupId>com.belerweb</groupId>
-    <artifactId>pinyin4j</artifactId>
-    <version>2.5.1</version>
+    <artifactId>pinyin4j_gome</artifactId>
+    <version>1</version>
 
     <name>Chinese to Pinyin</name>
     <description>Support Chinese character (both Simplified and Tranditional) to most popular Pinyin systems, including Hanyu Pinyin, Tongyong Pinyin, Wade-Giles, MPS2, Yale and Gwoyeu Romatzyh. Support multiple pronounciations and customized output.</description>
@@ -78,13 +78,13 @@
                     <configFile>${project.basedir}/eclipse-java-google-style.xml</configFile>
                     <lineEnding>LF</lineEnding>
                 </configuration>
-                <executions>
+<!--                 <executions>
                     <execution>
                         <goals>
                             <goal>format</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions> -->
             </plugin>
         </plugins>
         <pluginManagement>
